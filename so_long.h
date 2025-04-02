@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:14:36 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/01 18:43:53 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:59:52 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 # include "./Libft/libft.h"
 # include "./mlx/mlx.h"
-
+# include <stdio.h>
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	char	**map;
+
 }			t_data;
+
+void	parse_map(char *argv, char ***map);
 
 #endif
