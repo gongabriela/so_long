@@ -6,7 +6,7 @@
 #    By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/01 16:53:51 by ggoncalv          #+#    #+#              #
-#    Updated: 2025/04/02 15:57:42 by ggoncalv         ###   ########.fr        #
+#    Updated: 2025/04/03 15:10:24 by ggoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -lXext -lX11 -lm -lz
 
-SRC = main.c
+SRC = main.c parse_map.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = ./Libft/libft.a

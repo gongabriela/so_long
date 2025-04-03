@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:14:26 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/02 16:06:37 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/03 16:23:24 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
-	if (argc != 2)
-		perror("Invalid number of arguments");
-	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4) != 0 || access(argv[1], R_OK) == -1)
-	{
-		ft_putendl_fd("invalid file", 2);
-		exit(1);
-	}
-	parse_map(argv[1], &data.map);
+	parse_map(argc, argv[1], &data.map);
+	printf("IN MAIN\n");
+	int i = 0;
+	while (data.map[i] != NULL)
+		free(data.map[i++]);
+	free(data.map);
 	return (0);
 }
-
