@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:53:25 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/04 19:50:39 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:21:22 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	init_map(char *argv, char ***map_data)
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		ft_exit("open() failed at init map", NULL);
+	line = NULL;
+	temp = NULL;
 	line = get_next_line(fd);
 	if (line == NULL)
 		ft_exit("invalid map: map empty", NULL);
@@ -97,21 +99,21 @@ void	check_outer_walls(char ***map)
 	while((*map)[i][j] != '\0' && (*map)[i][j] != '\r')
 	{
 		if ((*map)[i][j] != '1')
-			ft_exit("invalid map", map);
+			ft_exit("invalid map: not surrounded by walls", map);
 		j++;
 	}
 	i++;
 	while((*map)[i + 1] != NULL)
 	{
 		if ((*map)[i][0] != '1' || (*map)[i][ft_strlen((*map)[i]) - 2] != '1')
-			ft_exit("invalid map", map);
+			ft_exit("invalid map: not surrounded by walls", map);
 		i++;
 	}
 	j = 0;
 	while((*map)[i][j] != '\0' && (*map)[i][j] != '\r')
 	{
 		if ((*map)[i][j] != '1')
-			ft_exit("invalid map", map);
+			ft_exit("invalid map: not surrounded by walls", map);
 		j++;
 	}
 }
@@ -155,22 +157,50 @@ void	parse_map_content(char ***map, int *collectibles)
 		ft_exit("invalid map", map);
 }
 
-void	parse_map_paths(char ***map, int *collectibles)
+/*void	parse_map_paths(char ***map, int *collectibles)
 {
+
 	//fazer uma copia do map
 	//encontrar a posicao do p
 	//tentar andar para cima, baixo, frente e tras nas pos validas (wque nao sao 1)
 	//keep track of pos visitadas
 	//ir contando por quantos coletaveis e a saida passam
-}
+}*/
 
 void	parse_map(int argc, char *argv, char ***map)
 {
 	int	collectibles;
+	t_pos	pos;
 
 	parse_map_file(argc, argv); //se so ha 2 args, se o file tem .ber, se o file e readable
 	init_map(argv, map); //colocar o mapa em um char **
 	parse_map_size(map); //se e maior do que deveria, se nao existe, se e um retangulo
 	parse_map_content(map, &collectibles); //ver se se o mapa e contornado por paredes, se tem 1 player, 1 exit, e no minimo 1 coletavel. ver se o resto e espaco livre e nao tem uma letra desconhecida
-	parse_map_paths(map, &collectibles); //ver se e possivel apanhar todos os coletaveis e chegar a saida com o flood fill algorithm
+	//parse_map_paths(map, &collectibles); //ver se e possivel apanhar todos os coletaveis e chegar a saida com o flood fill algorithm
+	get_player_position(map);
+	ft_printf("player position: [%d][%d]\n", pos.x, pos.y);
+}
+
+void	get_player_position(char ***t_map)
+{
+	t_pos	pos;
+
+	pos.x = 0;
+	while((*t_map)[pos.x])
+	{
+		pos.y = 0;
+		while ((*t_map)[pos.x][pos.y])
+		{
+			if ((*t_map)[pos.x][pos.y] == 'P')
+				return ;
+			pos.y++;
+		}
+		pos.x++;
+	}
+
+}
+void	flood_fill()
+{
+
+
 }
