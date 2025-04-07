@@ -6,7 +6,7 @@
 #    By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/01 16:53:51 by ggoncalv          #+#    #+#              #
-#    Updated: 2025/04/03 15:10:24 by ggoncalv         ###   ########.fr        #
+#    Updated: 2025/04/03 16:53:30 by ggoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,8 @@ $(NAME): $(OBJ)
 debug:
 	make -C ./Libft
 	make -C ./mlx
-	$(CC) $(CFLAGS) -g $(OBJ) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) -g main.c parse_map.c $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	gdb --tui $(NAME)
-
 clean:
 	make -C ./Libft fclean
 	make -C ./mlx clean
