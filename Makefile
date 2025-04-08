@@ -6,7 +6,7 @@
 #    By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/01 16:53:51 by ggoncalv          #+#    #+#              #
-#    Updated: 2025/04/03 16:53:30 by ggoncalv         ###   ########.fr        #
+#    Updated: 2025/04/08 16:40:53 by ggoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MLX_FLAGS = -lXext -lX11 -lm -lz
 
-SRC = main.c parse_map.c
+SRC = main.c parse_map.c parse_map_2.c ft_free_exit.c tests.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT = ./Libft/libft.a
@@ -35,7 +35,7 @@ $(NAME): $(OBJ)
 debug:
 	make -C ./Libft
 	make -C ./mlx
-	$(CC) $(CFLAGS) -g main.c parse_map.c $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) -g $(SRC) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
 	gdb --tui $(NAME)
 clean:
 	make -C ./Libft fclean
