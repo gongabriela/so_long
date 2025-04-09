@@ -6,11 +6,17 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:39:12 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/08 16:41:17 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:45:01 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_free_mlx(t_mlx mlx)
+{
+	if (mlx.mlx_ptr != NULL)
+		free(mlx.mlx_ptr);
+}
 
 void	ft_exit(char *err_msg, t_data *data)
 {
@@ -34,6 +40,7 @@ void	ft_exit(char *err_msg, t_data *data)
 			free(data->ff_map);
 		}
 	}
+	ft_free_mlx(data->mlx);
 	if (ft_strncmp(err_msg, "OK!", 3) == 0)
 		exit(0);
 	exit(1);

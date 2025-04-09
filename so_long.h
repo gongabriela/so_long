@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:14:36 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/08 16:41:35 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/09 16:48:42 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include "./mlx/mlx.h"
 # include <stdio.h>
 # include <fcntl.h>
-
+# define TILE_SIZE 32
+//caminho para as imagens (?)
 typedef struct s_pos
 {
 	int	x;
@@ -25,6 +26,18 @@ typedef struct s_pos
 	int	col;
 	int	exit;
 }				t_pos;
+
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*win;
+	void	*player_img;
+	void	*wall_img;
+	void	*col_img;
+	void	*exit_img;
+	void	*bg_img;
+}			t_mlx;
+
 typedef struct s_data
 {
 	int		fd;
@@ -35,6 +48,7 @@ typedef struct s_data
 	int		collectibles;
 	int		ff_found;
 	t_pos	pos;
+	t_mlx	mlx;
 
 }			t_data;
 
@@ -48,6 +62,13 @@ void	parse_map_content(t_data *data);
 void	get_player_position(t_data *data);
 void	copy_map_to_ff(t_data *data);
 void	flood_fill(char **matrix, int *found, int x, int y);
+
+//render map
+void	load_game(t_data *data);
+int		get_image_ptr(t_mlx *mlx);
+void	render_background(t_mlx *mlx, t_data *data, char **map);
+void	render_walls(t_mlx *mlx, char **map);
+void	render_exit(t_mlx *mlx, char **map);
 
 //free and error/exit functions
 void	ft_exit(char *err_msg, t_data *data);

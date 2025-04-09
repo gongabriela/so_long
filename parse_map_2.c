@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:39:42 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/08 16:42:11 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/09 14:40:05 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,12 @@ void	get_player_position(t_data *data)
 		}
 		data->pos.x++;
 	}
-	ft_printf("player position: [%d][%d]\n", data->pos.x, data->pos.y);
 }
 
 void	copy_map_to_ff(t_data *data)
 {
 	int	i;
 
-	ft_printf("height: %d\n", data->h);
 	data->ff_map = ft_calloc(data->h + 1, sizeof(char *));
 	i = 0;
 	while (data->map[i])
@@ -92,8 +90,7 @@ void	copy_map_to_ff(t_data *data)
 		i++;
 	}
 	data->ff_map[i] = NULL;
-	ft_printf("flood_fill matrix:\n");
-	print_map(data->ff_map);
+	data->ff_found = 0;
 }
 
 void	flood_fill(char **matrix, int *found, int x, int y)
