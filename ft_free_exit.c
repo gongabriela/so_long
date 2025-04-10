@@ -6,16 +6,19 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:39:12 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/09 14:45:01 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:51:48 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_free_mlx(t_mlx mlx)
+void	ft_free_mlx_img(t_mlx *mlx)
 {
-	if (mlx.mlx_ptr != NULL)
-		free(mlx.mlx_ptr);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->bg_img);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->wall_img);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->col_img);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->exit_img);
+	mlx_destroy_image(mlx->mlx_ptr, mlx->player_img);
 }
 
 void	ft_exit(char *err_msg, t_data *data)
@@ -40,8 +43,10 @@ void	ft_exit(char *err_msg, t_data *data)
 			free(data->ff_map);
 		}
 	}
-	ft_free_mlx(data->mlx);
-	if (ft_strncmp(err_msg, "OK!", 3) == 0)
-		exit(0);
-	exit(1);
+	ft_free_mlx_img(&data->mlx);
+	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win);
+	mlx_destroy_display(data->mlx.mlx_ptr);
+	if (data->mlx.mlx_ptr != NULL)
+		free(data->mlx.mlx_ptr);
+	exit(0);
 }

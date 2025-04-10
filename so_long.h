@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:14:36 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/09 16:48:42 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:06:28 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include "./mlx/mlx.h"
 # include <stdio.h>
 # include <fcntl.h>
+# include <X11/keysym.h>
 # define TILE_SIZE 32
-//caminho para as imagens (?)
+
 typedef struct s_pos
 {
 	int	x;
@@ -47,6 +48,7 @@ typedef struct s_data
 	char	**ff_map;
 	int		collectibles;
 	int		ff_found;
+	int		mov;
 	t_pos	pos;
 	t_mlx	mlx;
 
@@ -69,10 +71,19 @@ int		get_image_ptr(t_mlx *mlx);
 void	render_background(t_mlx *mlx, t_data *data, char **map);
 void	render_walls(t_mlx *mlx, char **map);
 void	render_exit(t_mlx *mlx, char **map);
+void	render_collectibles(t_mlx *mlx, char **map);
+void	render_player(t_mlx *mlx, char **map);
+
+//hooks
+int		key_handler(int key_input, t_data *data);
+void	update_map_w(t_data *data, char **map, t_pos *pos);
+void	update_map_s(t_data *data, char **map, t_pos *pos);
+void	update_map_a(t_data *data, char **map, t_pos *pos);
+void	update_map_d(t_data *data, char **map, t_pos *pos);
 
 //free and error/exit functions
 void	ft_exit(char *err_msg, t_data *data);
-
+void	ft_free_mlx_img(t_mlx *mlx);
 //testing
 void	print_map(char **map);
 
