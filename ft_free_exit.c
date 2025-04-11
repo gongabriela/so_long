@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:39:12 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/11 10:17:57 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:36:07 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	ft_exit(char *err_msg, t_data *data)
 			free(data->ff_map);
 		}
 	}
-	ft_free_mlx(&data->mlx);
+	if (data != NULL)
+		ft_free_mlx(&data->mlx);
 	exit(0);
 	return (0);
 }

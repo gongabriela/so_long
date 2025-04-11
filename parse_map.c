@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:53:25 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/11 10:22:21 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:29:57 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	parse_map_size(t_data *data)
 
 	i = 0;
 	len = ft_strlen(data->map[i]);
+	if (len == 0)
+		ft_exit("error: empty map", data);
 	i++;
 	while (data->map[i] != NULL && len == ft_strlen(data->map[i]))
 		i++;

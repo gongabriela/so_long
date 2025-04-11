@@ -6,7 +6,7 @@
 #    By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/01 16:53:51 by ggoncalv          #+#    #+#              #
-#    Updated: 2025/04/10 16:53:44 by ggoncalv         ###   ########.fr        #
+#    Updated: 2025/04/11 10:44:30 by ggoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ OBJ = $(SRC:.c=.o)
 
 LIBFT = ./Libft/libft.a
 MLX = ./mlx/libmlx.a
+
+MAP_DIR = maps
+BIN = ./$(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -49,3 +52,15 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+test: all maps
+	@echo "Running map tests..."
+	@for map in $(MAP_DIR)/*.ber; do \
+		echo -n "Testing $$map... "; \
+		timeout 3s ./$(BIN) $$map > /dev/null 2>&1; \
+		if [ $$? -eq 0 ]; then \
+			echo "✅ PASS"; \
+		else \
+			echo "❌ FAIL"; \
+		fi; \
+	done
