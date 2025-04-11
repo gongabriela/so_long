@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:39:12 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/10 16:51:48 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:17:57 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,35 @@
 
 void	ft_free_mlx_img(t_mlx *mlx)
 {
-	mlx_destroy_image(mlx->mlx_ptr, mlx->bg_img);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->wall_img);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->col_img);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->exit_img);
-	mlx_destroy_image(mlx->mlx_ptr, mlx->player_img);
+	if (mlx->bg_img != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->bg_img);
+	if (mlx->wall_img != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->wall_img);
+	if (mlx->col_img != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->col_img);
+	if (mlx->exit_img != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->exit_img);
+	if (mlx->player_img != NULL)
+		mlx_destroy_image(mlx->mlx_ptr, mlx->player_img);
 }
 
-void	ft_exit(char *err_msg, t_data *data)
+void	ft_free_mlx(t_mlx *mlx)
+{
+	ft_free_mlx_img(mlx);
+	if (mlx->mlx_ptr != NULL && mlx->win != NULL)
+		mlx_destroy_window(mlx->mlx_ptr, mlx->win);
+	if (mlx->mlx_ptr != NULL)
+		mlx_destroy_display(mlx->mlx_ptr);
+	if (mlx->mlx_ptr != NULL)
+		free(mlx->mlx_ptr);
+}
+
+int	ft_exit(char *err_msg, t_data *data)
 {
 	int	i;
 
-	ft_putendl_fd(err_msg, 2);
+	if (err_msg != NULL)
+		ft_putendl_fd(err_msg, 2);
 	if (data != NULL)
 	{
 		if (data->map != NULL)
@@ -43,10 +60,13 @@ void	ft_exit(char *err_msg, t_data *data)
 			free(data->ff_map);
 		}
 	}
-	ft_free_mlx_img(&data->mlx);
-	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win);
-	mlx_destroy_display(data->mlx.mlx_ptr);
-	if (data->mlx.mlx_ptr != NULL)
-		free(data->mlx.mlx_ptr);
+	ft_free_mlx(&data->mlx);
 	exit(0);
+	return (0);
+}
+
+int	ft_exit_hook(t_data *data)
+{
+	ft_exit(NULL, data);
+	return (0);
 }

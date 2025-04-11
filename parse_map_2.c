@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:39:42 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/09 14:40:05 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:22:10 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,23 @@ void	copy_map_to_ff(t_data *data)
 	data->ff_found = 0;
 }
 
-void	flood_fill(char **matrix, int *found, int x, int y)
+void	flood_fill(char **matrix, t_data *data, int x, int y)
 {
-	if (matrix[x][y] == 'C' || matrix[x][y] == 'E'
-		|| matrix[x][y] == 'P' || matrix[x][y] == '0')
+	if (matrix[x][y] == 'C' || matrix[x][y] == 'P' || matrix[x][y] == '0')
 	{
-		if (matrix[x][y] == 'C' || matrix[x][y] == 'E' || matrix[x][y] == 'P')
-			(*found)++;
+		if (matrix[x][y] == 'C')
+			(data->ff_found)++;
 		matrix[x][y] = 'X';
+	}
+	else if (matrix[x][y] == 'E' && data->ff_exit == 0)
+	{
+		(data->ff_exit)++;
+		return ;
 	}
 	else
 		return ;
-	flood_fill(matrix, found, x + 1, y);
-	flood_fill(matrix, found, x - 1, y);
-	flood_fill(matrix, found, x, y + 1);
-	flood_fill(matrix, found, x, y - 1);
+	flood_fill(matrix, data, x + 1, y);
+	flood_fill(matrix, data, x - 1, y);
+	flood_fill(matrix, data, x, y + 1);
+	flood_fill(matrix, data, x, y - 1);
 }

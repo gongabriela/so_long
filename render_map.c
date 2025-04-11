@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:50:54 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/10 16:57:14 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:19:54 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	get_image_ptr(t_mlx *mlx)
 	int	width;
 	int	height;
 
-	mlx->player_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "img/player.xpm",
+	mlx->player_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "textures/player.xpm",
 			&width, &height);
-	mlx->wall_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "img/walls.xpm",
+	mlx->wall_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "textures/walls.xpm",
 			&width, &height);
-	mlx->col_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "img/collectibles.xpm",
+	mlx->col_img = mlx_xpm_file_to_image(mlx->mlx_ptr,
+			"textures/collectibles.xpm", &width, &height);
+	mlx->exit_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "textures/exit.xpm",
 			&width, &height);
-	mlx->exit_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "img/exit.xpm",
-			&width, &height);
-	mlx->bg_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "img/background.xpm",
+	mlx->bg_img = mlx_xpm_file_to_image(mlx->mlx_ptr, "textures/background.xpm",
 			&width, &height);
 	if (!mlx->player_img || !mlx->wall_img || !mlx->col_img || !mlx->exit_img
 		|| !mlx->bg_img)

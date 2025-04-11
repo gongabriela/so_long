@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:14:36 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/10 17:06:28 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:22:37 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,15 @@ typedef struct s_data
 	char	**ff_map;
 	int		collectibles;
 	int		ff_found;
+	int		ff_exit;
 	int		mov;
 	t_pos	pos;
 	t_mlx	mlx;
 
 }			t_data;
+
+//init structs
+void	init_structs(t_data *data, t_mlx *mlx);
 
 //parsing the .ber map
 void	parse_map(int argc, char *argv, t_data *data);
@@ -63,7 +67,7 @@ void	check_inter(t_data *data, int x, int *exit, int *player);
 void	parse_map_content(t_data *data);
 void	get_player_position(t_data *data);
 void	copy_map_to_ff(t_data *data);
-void	flood_fill(char **matrix, int *found, int x, int y);
+void	flood_fill(char **matrix, t_data *data, int x, int y);
 
 //render map
 void	load_game(t_data *data);
@@ -82,8 +86,11 @@ void	update_map_a(t_data *data, char **map, t_pos *pos);
 void	update_map_d(t_data *data, char **map, t_pos *pos);
 
 //free and error/exit functions
-void	ft_exit(char *err_msg, t_data *data);
+int		ft_exit(char *err_msg, t_data *data);
 void	ft_free_mlx_img(t_mlx *mlx);
+void	ft_free_mlx(t_mlx *mlx);
+int		ft_exit_hook(t_data *data);
+
 //testing
 void	print_map(char **map);
 

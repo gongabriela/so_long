@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:53:25 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/10 14:57:24 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 10:22:21 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	parse_map_size(t_data *data)
 
 void	parse_map(int argc, char *argv, t_data *data)
 {
+	data->ff_exit = 0;
 	data->map = NULL;
 	data->ff_map = NULL;
 	parse_map_file(argc, argv, data);
@@ -76,7 +77,9 @@ void	parse_map(int argc, char *argv, t_data *data)
 	parse_map_content(data);
 	get_player_position(data);
 	copy_map_to_ff(data);
-	flood_fill(data->ff_map, &data->ff_found, data->pos.x, data->pos.y);
-	if (data->ff_found != data->collectibles + 2)
+	flood_fill(data->ff_map, data, data->pos.x, data->pos.y);
+	if (data->ff_found != data->collectibles)
+		ft_exit("Error: this game is not playable", data);
+	if (data->ff_exit != 1)
 		ft_exit("Error: this game is not playable", data);
 }
