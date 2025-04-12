@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:50:54 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/11 10:19:54 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:22:08 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_image_ptr(t_mlx *mlx)
 void	load_game(t_data *data)
 {
 	if (get_image_ptr(&data->mlx) == -1)
-		ft_exit("Error: failed to get pointer of .xpm file", data);
+		ft_exit("Error\nFailed to get pointer of .xpm file", data);
 	render_background(&data->mlx, data, data->map);
 	render_walls(&data->mlx, data->map);
 	render_exit(&data->mlx, data->map);

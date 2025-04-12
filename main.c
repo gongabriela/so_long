@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 17:14:26 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/11 10:07:20 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/12 14:07:14 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ int	main(int argc, char **argv)
 	parse_map(argc, argv[1], &data);
 	data.mlx.mlx_ptr = mlx_init();
 	if (!data.mlx.mlx_ptr)
-		ft_exit("Error: failed to init mlx library", &data);
-	data.w = data.w - 1;
+		ft_exit("Error\nFailed to init mlx library", &data);
 	data.mlx.win = mlx_new_window(data.mlx.mlx_ptr, (data.w * TILE_SIZE),
 			(data.h * TILE_SIZE), "map.ber");
 	if (!data.mlx.win)
-		ft_exit("Error: failed to open game window", &data);
+		ft_exit("Error\nFailed to open game window", &data);
 	load_game(&data);
 	data.mov = 0;
 	mlx_key_hook(data.mlx.win, key_handler, &data);

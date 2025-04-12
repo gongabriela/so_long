@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:39:42 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/04/11 10:22:10 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:21:55 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	check_inter(t_data *data, int x, int *exit, int *player)
 	y = 0;
 	while (data->map[x][y])
 	{
-		if ((y == 0 || y == data->w - 2) && data->map[x][y] != '1')
-			ft_exit("Error: map is not surrounded by walls", data);
+		if ((y == 0 || y == data->w - 1) && data->map[x][y] != '1')
+			ft_exit("Error\nMap is not surrounded by walls", data);
 		else if (data->map[x][y] == 'C')
 			data->collectibles++;
 		else if (data->map[x][y] == 'E')
@@ -28,7 +28,7 @@ void	check_inter(t_data *data, int x, int *exit, int *player)
 		else if (data->map[x][y] == 'P')
 			(*player)++;
 		else if (ft_strchr("10CEP\r", data->map[x][y]) == NULL)
-			ft_exit("Error: item in map is not acceptable", data);
+			ft_exit("Error\nItem in map is not acceptable", data);
 		y++;
 	}
 }
@@ -51,15 +51,15 @@ void	parse_map_content(t_data *data)
 		{
 			while (data->map[x][y] && data->map[x][y] == '1')
 				y++;
-			if (y != data->w - 1)
-				ft_exit("Error: map is not surrounded by walls", data);
+			if (y != data->w)
+				ft_exit("Error\nMap is not surrounded by walls", data);
 		}
 		else
 			check_inter(data, x, &exit, &player);
 		x++;
 	}
 	if (exit != 1 || data->collectibles < 1 || player != 1)
-		ft_exit("Error: invalid number of mandatory items", data);
+		ft_exit("Error\nInvalid number of mandatory items", data);
 }
 
 void	get_player_position(t_data *data)
